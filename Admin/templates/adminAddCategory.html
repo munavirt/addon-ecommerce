@@ -1,0 +1,65 @@
+{% extends 'admin-base.html' %}
+{% load static %}
+{% block content %}
+
+      <!-- partial -->
+      
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title">Category </h3>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Category</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add Category</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="row">
+              
+              </div>
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Add Category</h4>
+                    <!-- <p class="card-description"> Basic form elements </p> -->
+                    <form class="forms-sample" method="POST" action="{% url 'add-category' %}" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="exampleInputName1">Category Name</label>
+                        <input type="text" name="category_name" required class="form-control" id="exampleInputName1" placeholder="Enter Product Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">Slug</label>
+                        <input type="text" name="slug" required class="form-control" id="exampleInputEmail3" placeholder="Slug">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea name="description" required class="form-control" id="exampleTextarea1" rows="5"></textarea>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label>File upload</label>
+                        <input type="file" name="image" class="file-upload-default" accept="image/*">
+                        <div class="input-group col-xs-12">
+                          <input type="file" name="image" class="form-control file-upload-info" accept="image/*" placeholder="Upload Image">
+                        </div>
+                      </div>
+                      
+                      <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                      <button class="btn btn-light">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+            
+              
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+
+{%endblock%}

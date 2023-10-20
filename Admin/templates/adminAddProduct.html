@@ -1,0 +1,114 @@
+{% extends 'admin-base.html' %}
+{% load static %}
+{% block content %}
+
+      <!-- partial -->
+      
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title"> Products </h3>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Products</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add Products</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="row">
+              
+              </div>
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Add Products</h4>
+                    <form class="forms-sample" method="POST" action="{% url 'add-product'%}" enctype="multipart/form-data" id="productForm">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="exampleInputName1">Product Name</label>
+                        <input type="text" class="form-control" name="product_name" id="exampleInputName1" placeholder="Product Name" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">Slug</label>
+                        <input type="text" class="form-control" name="slug" id="exampleInputEmail3" placeholder="Slug" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect2">Category</label>
+                        <select class="form-control" name="category" required id="exampleFormControlSelect2">
+                          {% for category in categories %}
+                          <option value="{{ category.id }}">{{category.category_name}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" required name="description" id="exampleTextarea1" rows="5"></textarea>
+                      </div>
+                      <!-- <div class="form-group">
+                        <label for="exampleInputPassword4">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleSelectGender">Gender</label>
+                        <select class="form-control" id="exampleSelectGender">
+                          <option>Male</option>
+                          <option>Female</option>
+                        </select>
+                      </div> -->
+                      <div class="form-group">
+                        <label>File upload</label>
+                        <input type="file" name="image" class="file-upload-default" accept="image/*">
+                        <div class="input-group col-xs-12">
+                          <input type="file" name="image" class="form-control file-upload-info" accept="image/*" placeholder="Upload Image">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">Old Price</label>
+                        <input type="number" name="old_price" required class="form-control" id="exampleInputEmail3" placeholder="Price">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">New Price</label>
+                        <input type="number" name="new_price" required class="form-control" id="exampleInputEmail3" placeholder="Price">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleInputCity1">Stock</label>
+                        <input type="number" required name="stock" class="form-control" id="exampleInputCity1" placeholder="Stock">
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-3 col-form-label" >Available</label>
+                        <div class="col-sm-4">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" required class="form-check-input" name="is_available" id="membershipRadios1" value="True" checked> Yes
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" required name="is_available" id="membershipRadios2" value="False"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                      
+                      <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                      <button class="btn btn-light">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+            
+              
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+{%endblock%}

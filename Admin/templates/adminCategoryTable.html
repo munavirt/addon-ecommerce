@@ -1,0 +1,117 @@
+{% extends 'admin-base.html' %}
+{% load static %}
+{% block content %}
+       
+       <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title"> Basic Tables </h3>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Basic tables
+
+                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Update</h5>
+                                    
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form class="forms-sample" method="POST" action="{% url 'add-category' %}" enctype="multipart/form-data">
+                                      {% csrf_token %}
+                                      <div class="form-group">
+                                        <label for="exampleInputName1">Category Name</label>
+                                        <input type="text" name="category_name" required class="form-control" id="exampleInputName1" placeholder="Enter Product Name">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="exampleInputEmail3">Slug</label>
+                                        <input type="text" name="slug" required class="form-control" id="exampleInputEmail3" placeholder="Slug">
+                                      </div>
+                
+                                      <div class="form-group">
+                                        <label for="exampleTextarea1">Description</label>
+                                        <textarea name="description" required class="form-control" id="exampleTextarea1" rows="5"></textarea>
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                        <label>File upload</label>
+                                        <input type="file" name="image" class="file-upload-default" accept="image/*">
+                                        <div class="input-group col-xs-12">
+                                          <input type="file" name="image" class="form-control file-upload-info" accept="image/*" placeholder="Upload Image">
+                                        </div>
+                                      </div>
+                                    
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                  </li>
+                </ol>
+              </nav>
+            </div>
+            <div class="row">
+            
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body  table-responsive" >
+                    <h4 class="card-title">Product List</h4>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th> # </th>
+                          <th> Product name </th>
+                          <th>Stock</th>
+                          
+                          <th>Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for category in categories %}
+                        <tr>
+                          <td>{{category.id}}</td>
+                          <td>{{category.category_name}} </td>
+                          
+                          <td>{{ category.product_count }}</td>
+                          <td class="" style="max-width: 150px;">
+                            <button type="button" style="background: none; border: none;" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                              <i class="mdi mdi-tooltip-edit text-danger" style="font-size: 20px;"></i>
+                          </button>
+                          
+                            <i class="mdi mdi-delete"></i></td>
+                          
+                            
+
+
+                        </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+         
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    {%endblock%}

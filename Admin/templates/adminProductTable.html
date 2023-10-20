@@ -1,0 +1,65 @@
+{% extends 'admin-base.html' %}
+{% load static %}
+{% block content %}
+       
+       <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title"> Basic Tables </h3>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="row">
+            
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Product List</h4>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th> # </th>
+                          <th> Product name </th>
+                          <th> Stock </th>
+                          <th> Amount </th>
+                          <th> Deadline </th>
+                          <th>edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for product in products %}
+                        <tr>
+                          <td> {{product.id}}</td>
+                          <td> {{product.product_name}} </td>
+                          <td>{{product.stock}}</td>
+                          <td> ${{product.price}} </td>
+                          <td> May 15, 2015 </td>
+                          <td><i class="mdi mdi-shopping menu-icon"></i>
+                            <i class="mdi mdi-shopping menu-icon"></i></td>
+                        </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+         
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    {%endblock%}
