@@ -141,7 +141,7 @@
 				
 				<div class="row">
 					<!-- single product -->
-					{% for product in products %}
+					{% for product in latest_products %}
 						{% if forloop.counter <= 4 %}
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
@@ -151,14 +151,13 @@
 										<h6>{{ product.product_name }}</h6>
 									</a>
 									<div class="price">
-										<h6>${{ product.new_price }}</h6>
-										<h6 class="l-through">${{ product.old_price }}</h6>
+										<h6>AED {{ product.new_price }}</h6>
+										<h6 class="l-through">AED {{ product.old_price }}</h6>
 									</div>
 									
 								</div>
 							</div>
 						</div>
-						
 						{% endif %}
 					{% endfor %}
 				</div>
@@ -181,7 +180,7 @@
 					<!-- single product -->
 					<div class="row">
 						<!-- single product -->
-						{% for product in products %}
+						{% for product in upcoming_products %}
 							{% if forloop.counter <= 4 %}
 							<div class="col-lg-3 col-md-6">
 								<div class="single-product">
@@ -191,15 +190,14 @@
 											<h6>{{ product.product_name }}</h6>
 										</a>
 										<div class="price">
-											<h6>${{ product.new_price }}</h6>
-											<h6 class="l-through">${{ product.old_price }}</h6>
+											<h6>AED {{ product.new_price }}</h6>
+											<h6 class="l-through">AED {{ product.old_price }}</h6>
 										</div>
 										
 									</div>
 								</div>
 							</div>
-							
-							{% endif %}
+							{%endif%}
 						{% endfor %}
 					</div>
 				</div>
@@ -208,93 +206,45 @@
 	</div>
 	</section>
 
+	
 	<section class="owl-carousel active-product-area section_gap">
-		<!-- single product slide -->
-			
-		<div class="single-product-slider">
-			
-			<div class="container">
-
-				<div class="row justify-content-center">
-					<div class="col-lg-6 text-center">
-
-						<div class="section-title">
-							<h1>Jackets</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore
-								magna aliqua.</p>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<!-- single product -->
-					{% for product in products %}
-						{% if forloop.counter <= 4 %}
-						<div class="col-lg-3 col-md-6">
-							<div class="single-product">
-								<a href="{{ product.get_url }}"><img class="img-fluid" src="{{ product.images.url }}" style="height: 325px;" alt=""></a>
-								<div class="product-details">
-									<a href="{{product.get_url }}">
-										<h6>{{ product.product_name }}</h6>
-									</a>
-									<div class="price">
-										<h6>${{ product.new_price }}</h6>
-										<h6 class="l-through">${{ product.old_price }}</h6>
-									</div>
-									
-								</div>
-							</div>
-						</div>
-						
-						{% endif %}
-					{% endfor %}
-				</div>
+		{% for category in categories %}
+	<div class="single-product-slider">
+		<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-6 text-center">
+			<div class="section-title">
+				<h1>{{ category.category_name }}</h1>
+				<p>{{ category.description }}</p>
+			</div>
 			</div>
 		</div>
-		<!-- single product slide -->
-		<div class="single-product-slider">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-6 text-center">
-						<div class="section-title">
-							<h1>T-shirts</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore
-								magna aliqua.</p>
-						</div>
-					</div>
+		<div class="row">
+			{% for product in category.product_set.all %}
+			{% if forloop.counter <= 4 %}
+			<div class="col-lg-3 col-md-6">
+			<div class="single-product">
+				<a href="{{ product.get_url }}"><img class="img-fluid" src="{{ product.images.url }}" style="height: 325px;" alt=""></a>
+				<div class="product-details">
+				<a href="{{product.get_url}}">
+					<h6>{{ product.product_name }}</h6>
+				</a>
+				<div class="price">
+					<h6>AED {{ product.new_price }}</h6>
+					<h6 class="l-through">AED {{ product.old_price }}</h6>
 				</div>
-
-					<!-- single product -->
-					<div class="row">
-						<!-- single product -->
-						{% for product in products %}
-							{% if forloop.counter <= 4 %}
-							<div class="col-lg-3 col-md-6">
-								<div class="single-product">
-									<a href="{{ product.get_url }}"><img class="img-fluid" src="{{ product.images.url }}" style="height: 325px;" alt=""></a>
-									<div class="product-details">
-										<a href="{{product.get_url }}">
-											<h6>{{ product.product_name }}</h6>
-										</a>
-										<div class="price">
-											<h6>${{ product.new_price }}</h6>
-											<h6 class="l-through">${{ product.old_price }}</h6>
-										</div>
-										
-									</div>
-								</div>
-							</div>
-							
-							{% endif %}
-						{% endfor %}
-					</div>
 				</div>
 			</div>
+			</div>
+			{%endif%}
+			{% endfor %}
+		</div>
 		</div>
 	</div>
+	{% endfor %}
 	</section>
+	
+
 	<!-- end product Area -->
 
     <!-- Start exclusive deal Area -->
@@ -303,7 +253,7 @@
 
 
     <!-- Start brand Area -->
-	<section class="brand-area section_gap">
+	<section class="brand-area section_gap" style="height: 10px;">
 		<!-- <div class="container">
 			<div class="row">
 				<a class="col single-img" href="#">

@@ -50,45 +50,54 @@
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
-						<form action="" method="get">
-						<h3>{{single_product.product_name}}</h3>
-						<h2>${{single_product.new_price}}</h2>
-						<ul class="list">
-							<!-- <li><span>Category</span> : {{ single_product.category.category_name }}</li> -->
-							<li><a class="active" href="#"><span>Category</span>: {{ single_product.category.category_name }}</a></li>
-							{% if single_product.stock <= 0 %}
-								<li><a href="#"><span>Availibility</span> : Out Of Stock</a></li>
-							{% else %}
-								<li><a href="#"><span>Availibility</span> : In Stock</a></li>
+						<form method="post">
+							<h3>{{single_product.product_name}}</h3>
+							<h2>AED {{single_product.new_price}}</h2>
+							<ul class="list">
+								<li><a class="active" href="{{single_product.category.get_url}}"><span>Category</span>: {{ single_product.category.category_name }}</a></li>
+								{% if single_product.stock <= 0 %}
+									<li><a href="#"><span>Availibility</span> : Out Of Stock</a></li>
+								{% else %}
+									<li><a href="#"><span>Availibility</span> : In Stock</a></li>
+								{% endif %}
+							</ul>
+							<p>{{single_product.description}}</p>
+						</form>
+						<div class="product_count" style="margin-bottom: 20px;">
+							{% if single_product.stock > 0 %}
+								<label for="qty">Quantity:</label>
+								<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+								<button onclick="var result = document.getElementById('sst'); var sst = result.value; if (!isNaN(sst)) result.value++; return false;"
+									class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+								<button onclick="var result = document.getElementById('sst'); var sst = result.value; if (!isNaN(sst) && sst > 0) result.value--; return false;"
+									class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
 							{% endif %}
-						</ul>
-						<p>{{single_product.description}}</p>
-					</form>
-					<div class="product_count" style="margin-bottom: 20px;">
-						<label for="qty">Quantity:</label>
-						<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-						<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-						 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-						<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-						 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-					</div>
+						</div>
 						<div class="card_area d-flex align-items-center">
 							{% if single_product.stock <= 0 %}
-							<button type="button" class="btn btn-danger">Out Of Stock</button>
+								<button type="button" class="btn btn-warning">Out Of Stock</button>
+							{% else %}
+								{% if in_cart %}
+									<br>
+									<a href="" class="btn btn-success"><span class="text">Buy Now</span><i class="fas fa-check"></i></a>
+									<a href="" class="btn btn-outline-primary"><span class="text">View Cart</span><i class="fas fa-eye"></i></a>
 								{% else %}
-									{% if in_cart %}
-									<br><a href="" class="btn btn-success"><span class="text">Buy Now</span><i class="fas fa-check"></i></a> 
-									<a href="" class="btn btn-outline-primary"><span class="text">View Cart</span><i class="fas fa-eye"></i></a> 
-									{% else %}
-										<br><a class="primary-btn" href="{% url 'send_whatsapp_message' product_id=single_product.id %}">Buy Now</a>
-									{% endif%}
-
-
-								{% endif%}
-
+									<br>
+									<a class="primary-btn" href="{% url 'send_whatsapp_message' product_id=single_product.id %}">Buy Now</a>
+								{% endif %}
+							{% endif %}
 						</div>
+
+						<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+							<a class="a2a_button_facebook"></a>
+							<a class="a2a_button_twitter"></a>
+							<a class="a2a_button_whatsapp"></a>
+							<!-- Add more social media buttons as needed -->
+						</div>
+
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -556,5 +565,14 @@
 	</section> -->
 	<!-- End related-product Area -->
 
+	<script src="https://static.addtoany.com/menu/page.js"></script>
+	<script>
+		var productUrl = "{{ request.build_absolute_uri }}";
+		a2a.init('page', {
+			linkname: "{{ single_product.product_name }}",
+			linkurl: productUrl
+		});
+	</script>
+	
 
 {% endblock %}

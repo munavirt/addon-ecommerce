@@ -5,11 +5,15 @@ from django.db.models import Q
 from django.core.paginator import EmptyPage,PageNotAnInteger,Paginator
 # Create your views here.
 def home(request):
-    products = Product.objects.all().filter(is_available=True)
+    products = Product.objects.all().filter(is_available=True)[:4]
     categories = Category.objects.all()
+    latest_products = Product.objects.order_by('-created_date')[:4]
+    upcoming_products = Product.objects.filter(is_available=False)[:4]
     context = {
         'products': products,
-        'categories': categories
+        'categories': categories,
+        'latest_products': latest_products,
+        'upcoming_products':upcoming_products
     }
     return render(request,'index.html',context)
 
