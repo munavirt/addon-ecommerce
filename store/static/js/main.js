@@ -92,6 +92,7 @@ $(document).ready(function(){
     /*=================================
     Javascript for exclusive area carousel
     ==================================*/
+    console.log(prevImageUrl)
     $(".active-exclusive-product-slider").owlCarousel({
         items:1,
         autoplay:false,

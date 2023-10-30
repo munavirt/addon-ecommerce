@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-s+ye8(un6jiu*!l^-*7i-1s69da@ydl=gg*6d%erp)fof93@d^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['3.94.167.29']
 
 
 # Application definition
@@ -76,7 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'addon.wsgi.application'
 
-AUTH_USER_MODEL = 'Accounts.Account'
+# AUTH_USER_MODEL = 'Accounts.Account'
 
 
 # Database
